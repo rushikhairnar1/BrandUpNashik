@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrandUpNashik - Digital Marketing Agency</title>
+  
+  <!-- 1. Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 2. Custom CSS & Fonts -->
+  <style>
+    /* --- FONT IMPORTS --- */
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+    
+    :root {
+      --primary-blue: #4338CA; /* Indigo 700 */
+      --primary-light: #6366F1; /* Indigo 500 */
+      --primary-green: #10B981;  /* Emerald 500 */
+      --font-heading: 'Manrope', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+      cursor: none; /* Hide default cursor */
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+    @media (max-width: 768px) {
+      html { cursor: auto; }
+    }
+
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* --- Hero Gradient Text Animation --- */
+    .text-gradient-animated {
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-light), #9333EA, var(--primary-blue));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: text-shine 4s linear infinite;
+    }
+    @keyframes text-shine {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    /* --- Custom Cursor --- */
+    .custom-cursor {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      z-index: 1000;
+      pointer-events: none;
+      transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+      mix-blend-mode: difference;
+      background-color: white;
+      border: 2px solid white;
+      transform: translate(-50%, -50%);
+    }
+    .custom-cursor.is-hovering {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      mix-blend-mode: normal;
+    }
+    @media (max-width: 768px) {
+      .custom-cursor { display: none; }
+    }
+
+    /* --- Custom Scrollbar --- */
+    ::-webkit-scrollbar {
+      width: 8px;
+      background-color: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--primary-blue);
+      border-radius: 10px;
+      border: 2px solid #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb:hover { background-color: var(--primary-light); }
+
+    /* --- Tailwind Color Helpers --- */
+    .text-primary-blue { color: var(--primary-blue); }
+    .bg-primary-blue { background-color: var(--primary-blue); }
+    .border-primary-blue { border-color: var(--primary-blue); }
+    .hover\:text-primary-blue:hover { color: var(--primary-blue); }
+    .hover\:bg-blue-700:hover { background-color: var(--primary-light); }
+    .focus\:ring-primary-blue:focus {
+        --tw-ring-color: var(--primary-blue);
+        border-color: var(--primary-blue);
+    }
+    .focus\:border-primary-blue:focus { border-color: var(--primary-blue); }
+    .bg-primary-green { background-color: var(--primary-green); }
+    .text-primary-green { color: var(--primary-green); }
+    .text-primary-light { color: var(--primary-light); }
+
+    /* --- Interactive Click Effect --- */
+    .interactive {
+      transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .interactive:active {
+      transform: scale(0.95);
+    }
+
+    .hero-text-shadow { text-shadow: 0 3px 15px rgba(67, 56, 202, 0.2); }
+    
+    /* --- 'DOMINATE' PROBLEM FIX --- */
+    .hero-ticker-text { 
+      transition: opacity 0.3s ease-in-out;
+      display: inline-block; /* FIX: Prevents layout jiggle */
+      min-width: 10px;      /* FIX: Prevents collapse when empty */
+      min-height: 1.2em;    /* FIX: Ensures line-height is maintained */
+      vertical-align: bottom; /* Aligns with the "Dominate" text */
+    }
+    .hero-ticker-cursor { animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* --- Scroll Progress Bar --- */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-light), var(--primary-green));
+      box-shadow: 0 2px 10px rgba(67, 56, 202, 0.5);
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    /* --- WhatsApp Pulse Button --- */
+    .whatsapp-pulse-button {
+      width: 56px;
+      height: 56px;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-pulse-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+    }
+    .whatsapp-pulse-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 9999px;
+      background-color: var(--primary-green);
+      animation: sonar-pulse 2.5s infinite;
+      opacity: 0.75;
+      z-index: -1;
+    }
+    @keyframes sonar-pulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* --- Smoother Scroll Animations --- */
+    .reveal-base {
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .reveal-up { 
+      transform: translateY(24px) scale(0.95);
+    }
+    .reveal-left {
+      transform: translateX(-24px) scale(0.95);
+    }
+    .reveal-right {
+      transform: translateX(24px) scale(0.95);
+    }
+    .reveal-base.is-visible {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* --- AI Chatbot --- */
+    .chat-button {
+      box-shadow: 0 4px 10px rgba(67, 56, 202, 0.6);
+    }
+    .chat-window {
+      height: 400px;
+      max-height: 80vh;
+      width: 300px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease-in-out;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .chat-messages {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #ccc #f9fafb;
+    }
+    .source-pill {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 2px 6px;
+      background-color: #e5e7eb;
+      color: #4b5563;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+    .typing-bubble { display: flex; align-items: center; padding: 8px 10px; }
+    .typing-dot {
+      height: 8px; width: 8px; margin: 0 2px;
+      background-color: #9ca3af;
+      border-radius: 9999px;
+      animation: bounce 1.4s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(3) { animation-delay: -0.16s; }
+    @keyframes bounce { 0%, 80%, 100% { transform: scale(0); opacity: 0.5; } 40% { transform: scale(1.0); opacity: 1; } }
+
+    /* --- Hero Gradient --- */
+    .animated-gradient {
+      background: linear-gradient(-45deg, #EEF2FF, #ffffff, #E0F2FE, #F9FAFB); 
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- 3D Tilt Cards --- */
+    .tilt-card-container { height: 100%; will-change: transform, box-shadow; }
+    .service-card, .package-card, .review-card, .team-card, .work-card {
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+       border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* --- Service Card Unique Hover --- */
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-blue));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+      z-index: -1;
+    }
+    .group:hover .service-card::before {
+      opacity: 1;
+    }
+
+    /* --- Popular Package Pulse --- */
+    .popular-package {
+      animation: pulse-shadow 3s infinite;
+    }
+    @keyframes pulse-shadow {
+      0% { box-shadow: 0 0 0 0 rgba(67, 56, 202, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(67, 56, 202, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(67, 56, 202, 0); }
+    }
+    
+    /* --- Texture Background --- */
+    .bg-texture-bg {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236B7280' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-color: #f9fafb;
+    }
+    
+    /* --- Gradient CTA Button --- */
+    .primary-cta-gradient {
+      background: linear-gradient(120deg, var(--primary-blue), var(--primary-light), var(--primary-blue));
+      background-size: 200% auto;
+      transition: background-position 0.4s ease-in-out, transform 0.1s ease-out, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(67, 56, 202, 0.2);
+    }
+    .primary-cta-gradient:hover {
+      background-position: right center;
+      box-shadow: 0 8px 20px rgba(67, 56, 202, 0.4);
+    }
+
+    /* --- Secondary CTA Button --- */
+    .secondary-cta-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .secondary-cta-icon .cta-text {
+      transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: inline-block;
+    }
+    .secondary-cta-icon .cta-icon {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transform: translateX(200%);
+      position: absolute;
+      right: 2rem;
+      opacity: 0;
+    }
+    .secondary-cta-icon:hover .cta-text {
+      transform: translateX(-15px);
+    }
+    .secondary-cta-icon:hover .cta-icon {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* --- Accordion (FAQ) Icon --- */
+    .accordion-icon {
+      transition: transform 0.3s ease-in-out;
+    }
+    .accordion-open .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    /* --- NEW: Client Logo Scroll --- */
+    .scrolling-logos .logo-track {
+      animation: scroll-logos 30s linear infinite;
+      width: fit-content;
+    }
+    .logo-item {
+      flex-shrink: 0;
+    }
+    @keyframes scroll-logos {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar"></div>
+
+  <!-- Header -->
+  <header id="header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm transition-shadow duration-300 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="#hero" class="interactive font-heading text-2xl font-black text-primary-blue tracking-wider rounded-lg p-1">
+          BrandUpNashik
+        </a>
+        
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#services" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Services</a>
+          <a href="#why-us" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Why Us</a>
+          <!-- NEW NAV LINK -->
+          <a href="#clients" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Clients</a>
+          <a href="#work" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Our Work</a>
+          <a href="#process" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Process</a>
+          <a href="#packages" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">Packages</a>
+          <a href="#faq" class="interactive text-gray-600 hover:text-primary-blue transition duration-300 font-medium hover:underline hover:underline-offset-4">FAQ</a>
+          <a href="#contact" class="interactive primary-cta-gradient px-5 py-2 text-white font-semibold rounded-full shadow-lg font-heading">
+            Contact Us
+          </a>
+        </nav>
+
+        <button id="mobile-menu-button" class="interactive md:hidden text-gray-600 hover:text-primary-blue" aria-label="Toggle mobile menu">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg pb-2">
+      <a href="#services" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Services</a>
+      <a href="#why-us" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Why Us</a>
+      <a href="#clients" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Clients</a>
+      <a href="#work" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Our Work</a>
+      <a href="#process" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Process</a>
+      <a href="#packages" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Packages</a>
+      <a href="#about" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">About Us</a>
+      <a href="#reviews" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Reviews</a>
+      <a href="#faq" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">FAQ</a>
+      <a href="#team" class="interactive mobile-menu-link block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
+      <a href="#contact" class="interactive mobile-menu-link primary-cta-gradient block mx-4 my-2 px-3 py-2 text-white text-center rounded-lg shadow-md font-heading">Contact Us</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section id="hero" class="animated-gradient pt-20 pb-28 md:pt-32 md:pb-40 border-b border-gray-100 overflow-hidden">
+      <div id="hero-parallax" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="reveal-base reveal-up is-visible">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-snug mb-4 hero-text-shadow font-heading">
+            Elevate Your Brand.
+            <br class="hidden md:block" />
+            <span class="text-gradient-animated">
+              Dominate <span id="hero-ticker-text"> </span><!-- Default space to prevent jiggle -->
+              <span class="hero-ticker-cursor">|</span>
+            </span>
+          </h1>
+        </div>
+        <div class="reveal-base reveal-up is-visible" style="transition-delay: 0.2s;">
+          <p class="mt-3 text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            BrandUpNashik is your full-service Digital Marketing and Growth Agency in Nashik, specializing in driving measurable results from strategy to execution.
+          </p>
+        </div>
+        <div class="reveal-base reveal-up is-visible" style="transition-delay: 0.4s;">
+          <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#contact" class="primary-cta-gradient interactive px-8 py-3 text-lg font-semibold text-white rounded-full shadow-lg font-heading">
+              Start My Growth Plan
+            </a>
+            <a href="#services" class="secondary-cta-icon interactive px-8 py-3 text-lg font-semibold text-primary-blue bg-white border border-gray-300 rounded-full shadow-lg">
+              <span class="cta-text">Explore Our Services</span>
+              <span class="cta-icon" aria-hidden="true">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 md:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Our Core Digital Marketing Service Stack
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            These are the foundational services we use to build your customized growth plan, from <strong>Social Media Management</strong> to <strong>Website</strong> optimization.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-6 md:gap-8">
+          <!-- Service 1 -->
+          <div class="reveal-base reveal-left h-full md:col-span-3 lg:col-span-3" style="transition-delay: 0.05s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Digital Strategy & SEO</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Full-scale <strong>Digital Marketing</strong> campaigns covering SEO, SEM, and content strategy for high ROI.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Service 2 -->
+          <div class="reveal-base reveal-right h-full md:col-span-3 lg:col-span-3" style="transition-delay: 0.1s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Social Media Management</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Comprehensive <strong>Social Media Management</strong> for all platforms, driving engagement and community growth.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Service 3-5 -->
+          <div class="reveal-base reveal-left h-full md:col-span-2 lg:col-span-2" style="transition-delay: 0.15s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Paid Advertising (PPC)</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Expert execution of high-ROI <strong>Facebook, Instagram, and YouTube Advertising</strong> that converts.</p>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up h-full md:col-span-2 lg:col-span-2" style="transition-delay: 0.2s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Content & Branding</h3>
+                <p class="text-gray-600 text-sm sm:text-base"><strong>Photography, Videography</strong>, <strong>Logo Design, and Social Media Post</strong> creation.</p>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-right h-full md:col-span-2 lg:col-span-2" style="transition-delay: 0.25s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon><line x1="12" y1="22" x2="12" y2="15.5"></line><polyline points="22 8.5 12 15.5 2 8.5"></polyline><polyline points="2 15.5 12 8.5 22 15.5"></polyline><line x1="12" y1="2" x2="12" y2="8.5"></line></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Website & Tech</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Custom <strong>Website</strong> design, development, and <strong>WhatsApp Bot</strong> integration.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Service 6 -->
+          <div class="reveal-base reveal-up h-full md:col-span-6 lg:col-span-6" style="transition-delay: 0.3s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="service-card bg-white p-8 sm:p-10 rounded-2xl shadow-lg h-full relative z-0">
+                <div class="text-primary-blue mb-4 transition-transform duration-300 ease-out group-hover:translate-y-[-4px]">
+                  <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 12v6"></path><path d="M11 8v10"></path><path d="M15 4v14"></path></svg>
+                </div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-gray-900">Growth & Analytics</h3>
+                <p class="text-gray-600 text-sm sm:text-base">Data-driven <strong>Review and Growth Nirikshan</strong>, with actionable <strong>Business Boost Ideas</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Why Partner With BrandUpNashik?
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            We provide more than just services. We deliver a data-driven, local-first partnership focused on one thing: your growth.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <div class="text-primary-blue mb-4">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Local Nashik Experts</h3>
+              <p class="text-gray-600">We aren't a faceless national agency. We live, work, and breathe the Nashik market, giving you a competitive local edge.</p>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <div class="text-primary-blue mb-4">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20V16"></path></svg>
+              </div>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Data-Driven Results</h3>
+              <p class="text-gray-600">We don't guess; we measure. Every strategy is backed by data, and we provide clear reports to show you exactly what's working.</p>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.2s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <div class="text-primary-blue mb-4">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mb-3">Proven Partner</h3>
+              <p class="text-gray-600">Our relationship is a partnership, not just a service. We are committed to your growth and are always just a call away.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: "Trusted By" Logo Bar Section -->
+    <section id="clients" class="py-16 md:py-24 bg-white border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="text-3xl font-heading text-center text-gray-900 mb-4">Trusted by Nashik's Finest</h2>
+          <p class="text-lg text-center text-gray-500 mb-12 max-w-3xl mx-auto">We are proud to be the growth partners for industry leaders.</p>
+        </div>
+        <div class="scrolling-logos overflow-hidden relative" style="mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);">
+          <div class="logo-track flex space-x-16">
+            <!-- Logos (will be duplicated by JS) -->
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">NASHIK FOODS</div>
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">TECHNOVA</div>
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">REALTY CO.</div>
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">AUTO ZENTRUM</div>
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">EDUWORLD</div>
+            <div class="logo-item text-2xl font-bold text-gray-400 font-heading">HEALTHWISE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Work Section -->
+    <section id="work" class="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Our Proven Results
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            We don't just talk strategy; we execute. Here's a look at the success we've delivered for businesses like yours.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="work-card relative bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Nashik Eatery Website" class="w-full h-80 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy">
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <p class="text-sm font-semibold text-primary-light uppercase tracking-wider">Web Design & SEO</p>
+                  <h3 class="font-heading text-xl font-bold text-white mt-1">Nashik Eatery Website</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="work-card relative bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="City Properties Social Media" class="w-full h-80 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy">
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <p class="text-sm font-semibold text-primary-light uppercase tracking-wider">Social Media Management</p>
+                  <h3 class="font-heading text-xl font-bold text-white mt-1">City Properties Social Media</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.2s;">
+            <div class="tilt-card-container h-full group interactive">
+              <div class="work-card relative bg-white rounded-2xl shadow-lg overflow-hidden h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1559028012-21B4a2fa75b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80" alt="Tech Innovate Branding" class="w-full h-80 object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy">
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <p class="text-sm font-semibold text-primary-light uppercase tracking-wider">Branding & Content</p>
+                  <h3 class="font-heading text-xl font-bold text-white mt-1">Tech Innovate Branding</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Our Process Section -->
+    <section id="process" class="py-16 md:py-24 bg-texture-bg border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Our 4-Step Path to Your Success
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            We follow a transparent, proven process to turn your vision into measurable results.
+          </p>
+        </div>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <span class="text-5xl font-extrabold text-primary-blue/20 font-heading">01</span>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mt-4 mb-3">Discovery & 'Growth Nirikshan'</h3>
+              <p class="text-gray-600">We start with a deep dive and our 'Growth Audit' to understand your brand, goals, and the unique challenges of the Nashik market.</p>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <span class="text-5xl font-extrabold text-primary-blue/20 font-heading">02</span>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mt-4 mb-3">Custom Strategy & Planning</h3>
+              <p class="text-gray-600">No cookie-cutter plans. We build a custom, data-driven strategy that combines SEO, SMM, and content to hit your specific targets.</p>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.2s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <span class="text-5xl font-extrabold text-primary-blue/20 font-heading">03</span>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mt-4 mb-3">Execution & Creation</h3>
+              <p class="text-gray-600">Our expert team gets to work, creating high-quality content, managing campaigns, and optimizing your web presence daily.</p>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.3s;">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-black/5 h-full">
+              <span class="text-5xl font-extrabold text-primary-blue/20 font-heading">04</span>
+              <h3 class="font-heading text-xl font-bold text-gray-900 mt-4 mb-3">Measure, Report & Evolve</h3>
+              <p class="text-gray-600">We track every click, like, and lead. You get clear monthly reports, and we constantly refine our strategy for even better results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Packages Section -->
+    <section id="packages" class="py-16 md:py-24 bg-white border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Flexible Digital Growth Packages
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            Choose the right <strong>Digital Marketing</strong> package to match your goals, from foundational presence to aggressive market dominance.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+          
+          <div class="reveal-base reveal-left" style="transition-delay: 0s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="package-card bg-white p-8 rounded-2xl shadow-lg flex flex-col justify-between border-t-8 border-gray-400 h-full">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Startup Ignite</h3>
+                  <p class="text-gray-500 mb-6">Foundational presence and core visibility for new businesses.</p>
+                  <p class="font-heading text-4xl font-extrabold text-primary-blue mb-8">
+                    <span class="text-xl font-normal">Starting at</span> ₹15k<span class="text-xl font-normal">/mo</span>
+                  </p>
+                  <ul class="space-y-4 text-gray-700">
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Social Media Management:</strong> 2 Platforms</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Basic Content Creation (8 posts/mo)</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Monthly Growth Report</span></li>
+                    <li class="flex items-start space-x-3 opacity-50"><svg class="h-6 w-6 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg><span>Ad Management (Add-on)</span></li>
+                  </ul>
+                </div>
+                <a href="#contact" class="secondary-cta-icon interactive mt-8 block w-full text-center py-3 bg-gray-100 text-gray-800 rounded-full font-semibold hover:bg-gray-200">
+                  <span class="cta-text">Choose Ignite</span>
+                  <span class="cta-icon" aria-hidden="true">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="package-card popular-package bg-white p-8 rounded-2xl shadow-2xl flex flex-col justify-between border-t-8 border-primary-blue relative lg:shadow-3xl h-full">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-blue text-white text-sm font-bold px-4 py-1 rounded-full shadow-md font-heading">
+                  MOST POPULAR
+                </div>
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Business Accelerator</h3>
+                  <p class="text-gray-500 mb-6">Comprehensive service for established businesses aiming for rapid growth.</p>
+                  <p class="font-heading text-5xl font-extrabold text-primary-blue mb-8">
+                    <span class="text-xl font-normal">Starting at</span> ₹35k<span class="text-xl font-normal">/mo</span>
+                  </p>
+                  <ul class="space-y-4 text-gray-700">
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span><strong>Full Social Media Mgmt:</strong> 3 Platforms</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Premium Content (15 posts + 1 Video/mo)</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dedicated Ad Campaign Manager</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Quarterly <strong>Growth Nirikshan</strong> Session</span></li>
+                  </ul>
+                </div>
+                <a href="#contact" class="primary-cta-gradient interactive mt-8 block w-full text-center py-3 text-white rounded-full font-semibold shadow-lg font-heading">
+                  Select Accelerator
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="reveal-base reveal-right" style="transition-delay: 0.2s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="package-card bg-white p-8 rounded-2xl shadow-lg flex flex-col justify-between border-t-8 border-gray-400 h-full">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Custom Enterprise</h3>
+                  <p class="text-gray-500 mb-6">Full-scale digital department for market leaders and high-volume needs.</p>
+                  <p class="font-heading text-4xl font-extrabold text-primary-blue mb-8">
+                    <span class="text-xl font-normal">Price by</span> Quote
+                  </p>
+                  <ul class="space-y-4 text-gray-700">
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Unlimited Platforms & Campaigns</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Full <strong>Website</strong> Management & Support</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Dedicated Full-Service Team</span></li>
+                    <li class="flex items-start space-x-3"><svg class="h-6 w-6 text-primary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Includes Photography & Videography</span></li>
+                  </ul>
+                </div>
+                <a href="#contact" class="secondary-cta-icon interactive mt-8 block w-full text-center py-3 bg-gray-100 text-gray-800 rounded-full font-semibold hover:bg-gray-200">
+                  <span class="cta-text">Request Custom Quote</span>
+                  <span class="cta-icon" aria-hidden="true">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative max-w-5xl mx-auto lg:flex lg:items-center">
+          
+          <div class="reveal-base reveal-left relative z-10 w-full lg:w-3/V">
+            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-2xl border border-black/5">
+              <div class="space-y-6">
+                <p class="text-sm font-semibold text-primary-blue uppercase tracking-wider font-heading">
+                  Who We Are
+                </p>
+                <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-gray-900">
+                  The Nashik-Based Agency Focused on Your Measurable Success.
+                </h2>
+                <p class="text-lg text-gray-600">
+                  BrandUpNashik was founded on the principle that local businesses deserve world-class digital presence. We are a passionate, outcome-driven team that believes great marketing isn't just about beautiful design—it's about results, transparency, and a partnership built on trust.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal-base reveal-right w-full lg:w-1/2 h-80 lg:h-auto lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 mt-8 lg:mt-0 lg:-mr-16">
+            <div class="rounded-2xl h-full shadow-xl overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="BrandUpNashik team discussing digital strategy" class="w-full h-full object-cover object-center" loading="lazy">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 md:py-24 bg-white border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            What Our Clients Say
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            Hear directly from the businesses we've helped elevate in the digital space.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="review-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-primary-blue/20 h-full flex flex-col justify-between">
+                <div>
+                  <div class="mb-4 text-primary-blue text-2xl font-black">“</div>
+                  <p class="text-base text-gray-700 italic">
+                    The website they delivered was a game-changer. It's clean, fast, and converting at 3x our previous rate. BrandUpNashik handled the photography and web development seamlessly.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200 flex items-center">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Kavita S." class="h-12 w-12 rounded-full object-cover mr-4" loading="lazy">
+                  <div>
+                    <p class="font-bold text-gray-900 font-heading">Kavita S.</p>
+                    <p class="text-sm text-primary-blue">Owner, Nashik Eatery</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="review-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-primary-blue/20 h-full flex flex-col justify-between">
+                <div>
+                  <div class="mb-4 text-primary-blue text-2xl font-black">“</div>
+                  <p class="text-base text-gray-700 italic">
+                    Our social media engagement skyrocketed after BrandUpNashik took over. Their team's strategy for Instagram and Facebook Ads was focused and produced real leads.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200 flex items-center">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Rahul V." class="h-12 w-12 rounded-full object-cover mr-4" loading="lazy">
+                  <div>
+                    <p class="font-bold text-gray-900 font-heading">Rahul V.</p>
+                    <p class="text-sm text-primary-blue">Marketing Manager, City Properties</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.2s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="review-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-primary-blue/20 h-full flex flex-col justify-between">
+                <div>
+                  <div class="mb-4 text-primary-blue text-2xl font-black">“</div>
+                  <p class="text-base text-gray-700 italic">
+                    We appreciate their Growth Nirikshan process. They don't just run ads; they provide clear, data-driven ideas that truly boost the overall business plan. Highly professional.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200 flex items-center">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Priya M." class="h-12 w-12 rounded-full object-cover mr-4" loading="lazy">
+                  <div>
+                    <p class="font-bold text-gray-900 font-heading">Priya M.</p>
+                    <p class="text-sm text-primary-blue">CEO, Tech Innovate</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Join Our Fast-Growing Team in Nashik
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-12 max-w-3xl mx-auto">
+            We're always looking for passionate digital experts in Nashik to help us deliver measurable growth for our clients.
+          </p>
+        </div>
+        <div class="space-y-4 max-w-4xl mx-auto">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-md flex flex-col sm:flex-row justify-between items-center sm:items-center hover:bg-gray-100 transition duration-300 border border-black/5">
+              <div class="text-center sm:text-left mb-2 sm:mb-0">
+                <h3 class="font-heading text-lg sm:text-xl font-bold text-gray-900">Social Media Marketing Executive (SMME)</h3>
+                <p class="text-primary-blue font-medium mt-1 text-sm">Full-Time | Nashik Office</p>
+              </div>
+              <a href="#contact" class="primary-cta-gradient interactive px-5 py-2 text-white font-semibold rounded-full shadow-lg w-full sm:w-auto text-center font-heading">
+                Apply Now
+              </a>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-md flex flex-col sm:flex-row justify-between items-center sm:items-center hover:bg-gray-100 transition duration-300 border border-black/5">
+              <div class="text-center sm:text-left mb-2 sm:mb-0">
+                <h3 class="font-heading text-lg sm:text-xl font-bold text-gray-900">Professional Videographer & Editor</h3>
+                <p class="text-primary-blue font-medium mt-1 text-sm">Project/Contract Basis</p>
+              </div>
+              <a href="#contact" class="primary-cta-gradient interactive px-5 py-2 text-white font-semibold rounded-full shadow-lg w-full sm:w-auto text-center font-heading">
+                Apply Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 md:py-24 bg-white border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Meet The Expert Digital Marketing Team
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            Our success is driven by a passionate group of strategists, creatives, and analysts.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div class="reveal-base reveal-up" style="transition-delay: 0s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden text-center h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Rushikesh Khairnar" class="w-full h-40 sm:h-56 object-cover object-center" loading="lazy">
+                <div class="p-6">
+                  <h3 class="font-heading text-xl font-bold text-gray-900">Rushikesh Khairnar</h3>
+                  <p class="text-primary-blue font-medium text-sm sm:text-base">Founder & Visionary (Owner)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden text-center h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Anjali Sharma" class="w-full h-40 sm:h-56 object-cover object-center" loading="lazy">
+                <div class="p-6">
+                  <h3 class="font-heading text-xl font-bold text-gray-900">Anjali Sharma</h3>
+                  <p class="text-primary-blue font-medium text-sm sm:text-base">Head of Social Media</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.2s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden text-center h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Vikas Kulkarni" class="w-full h-40 sm:h-56 object-cover object-center" loading="lazy">
+                <div class="p-6">
+                  <h3 class="font-heading text-xl font-bold text-gray-900">Vikas Kulkarni</h3>
+                  <p class="text-primary-blue font-medium text-sm sm:text-base">Lead Creative & Content</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-base reveal-up" style="transition-delay: 0.3s;">
+            <div class="tilt-card-container h-full interactive">
+              <div class="team-card bg-white rounded-2xl shadow-lg overflow-hidden text-center h-full border border-black/5">
+                <img src="https://images.unsplash.com/photo-1505033575518-a36ea2e75ae4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Sneha More" class="w-full h-40 sm:h-56 object-cover object-center" loading="lazy">
+                <div class="p-6">
+                  <h3 class="font-heading text-xl font-bold text-gray-900">Sneha More</h3>
+                  <p class="text-primary-blue font-medium text-sm sm:text-base">Web & Ad Analyst</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-24 bg-gray-50 border-t border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-16 max-w-3xl mx-auto">
+            Quick answers to common questions about digital growth and our processes.
+          </p>
+        </div>
+        <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+          <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-black/5">
+            <div id="faq-accordion-container" class="divide-y divide-gray-200">
+              <!-- FAQ 1 -->
+              <div class="border-b border-gray-200">
+                <button class="faq-button flex justify-between items-center w-full py-5 text-left interactive">
+                  <span class="text-lg font-semibold text-gray-900 font-heading">How long until I see results from SEO?</span>
+                  <svg class="h-6 w-6 text-primary-blue accordion-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+                  <p class="pt-2 pb-5 text-gray-600">SEO is a long-term strategy. While foundational improvements can be made quickly, it typically takes 4-6 months to see significant, sustainable results in rankings and organic traffic, especially in a competitive market like Nashik.</p>
+                </div>
+              </div>
+              <!-- FAQ 2 -->
+              <div class="border-b border-gray-200">
+                <button class="faq-button flex justify-between items-center w-full py-5 text-left interactive">
+                  <span class="text-lg font-semibold text-gray-900 font-heading">Is Social Media Management (SMM) really necessary?</span>
+                  <svg class="h-6 w-6 text-primary-blue accordion-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+                  <p class="pt-2 pb-5 text-gray-600">Absolutely. In today's market, your social media is your 'digital handshake.' It's not just about posting; it's about building a community, establishing trust, and creating a direct channel to your customers. Consistent, professional SMM is crucial for brand relevance.</p>
+                </div>
+              </div>
+              <!-- FAQ 3 -->
+              <div class="border-b border-gray-200">
+                <button class="faq-button flex justify-between items-center w-full py-5 text-left interactive">
+                  <span class="text-lg font-semibold text-gray-900 font-heading">What is 'Growth Nirikshan' (Growth Audit)?</span>
+                  <svg class="h-6 w-6 text-primary-blue accordion-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+                  <p class="pt-2 pb-5 text-gray-600">This is our signature 'Growth Audit' process. We conduct a deep, data-driven analysis of your entire digital presence—your website, SEO, social media, and ad performance—to identify critical problems and, more importantly, a 'Business Boost Idea'—a high-impact opportunity for growth.</p>
+                </div>
+              </div>
+              <!-- FAQ 4 -->
+              <div class="border-b border-gray-200">
+                <button class="faq-button flex justify-between items-center w-full py-5 text-left interactive">
+                  <span class="text-lg font-semibold text-gray-900 font-heading">Why choose a local Nashik agency like BrandUpNashik?</span>
+                  <svg class="h-6 w-6 text-primary-blue accordion-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out max-h-0">
+                  <p class="pt-2 pb-5 text-gray-600">While digital marketing is global, understanding the local market is a key advantage. We know the Nashik audience, their behavior, and the competitive landscape. This allows us to create strategies that resonate deeply with the local community, which outside agencies often miss.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Final CTA Section -->
+    <section id="final-cta" class="py-16 md:py-24 bg-primary-blue">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-white mb-6">
+            Ready to Finally Dominate Your Market?
+          </h2>
+          <p class="text-lg text-indigo-200 mb-10 max-w-2xl mx-auto">
+            Stop guessing and start growing. Let our expert team build a data-driven strategy that delivers real, measurable results for your business.
+          </p>
+          <a href="#contact" class="interactive px-10 py-4 text-lg font-semibold text-primary-blue bg-white rounded-full shadow-2xl font-heading transform transition-transform duration-300 hover:scale-105">
+            Get My Free Growth Plan
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal-base reveal-up">
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
+            Get in Touch
+          </h2>
+          <p class="text-lg text-center text-gray-500 mb-12 max-w-3xl mx-auto">
+            Fill out the form below. We prioritize instant connection for all serious inquiries.
+          </p>
+        </div>
+
+        <div class="reveal-base reveal-up" style="transition-delay: 0.1s;">
+          <div class="max-w-3xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-2xl border border-black/5">
+            
+            <div id="success-message" class="hidden text-center py-12 px-4">
+              <div class="text-primary-green mb-4">
+                <svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-gray-900 mb-2">Thank You! Inquiry Received.</h3>
+              <p class="text-lg text-gray-600">
+                A BrandUpNashik specialist will be in touch shortly. We prioritize your success.
+              </p>
+              <div class="mt-6 pt-4 border-t border-gray-200">
+                 <p class="text-md text-gray-700 mb-2">You can reach us directly if needed:</p>
+                 <p class="text-primary-blue font-bold flex items-center justify-center space-x-2">
+                   <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                   <span>Call: <a href="tel:+918087298507" class="hover:underline interactive">+91 80872 98507</a></span>
+                 </p>
+              </div>
+            </div>
+
+            <form id="contact-form" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" name="name" id="name" required class="interactive mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Business Email</label>
+                <input type="email" name="email" id="email" required class="interactive mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue">
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number (Required)</label>
+                <input type="tel" name="phone" id="phone" required class="interactive mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue">
+              </div>
+              <div>
+                <label for="service" class="block text-sm font-medium text-gray-700">Interested Service</label>
+                <select id="service" name="service" required class="interactive mt-1 block w-full pl-3 pr-10 py-3 text-base border-gray-300 focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm rounded-lg shadow-sm">
+                  <option value="" disabled selected>Select a Service</option>
+                  <option value="Startup Ignite Package">Startup Ignite Package</option>
+                  <option value="Business Accelerator Package">Business Accelerator Package</option>
+                  <option value="Custom Enterprise Quote">Custom Enterprise Quote</option>
+                  <option value="Website Design (Standalone)">Website Design (Standalone)</option>
+                  <option value="Photography/Videography (Standalone)">Photography/Videography (Standalone)</option>
+                  <option value="Careers/Job Application">Careers/Job Application</option>
+                </select>
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+                <textarea id="message" name="message" rows="4" required class="interactive mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-blue focus:border-primary-blue"></textarea>
+              </div>
+              <div>
+                <button type="submit" class="primary-cta-gradient interactive w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-lg text-lg font-medium text-white focus:outline-none font-heading">
+                  Submit Inquiry
+                </button>
+              </div>
+            </form>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200 text-center space-y-2">
+              <p class="text-lg font-medium text-gray-700 mb-2">Or contact us directly:</p>
+              <p class="text-primary-blue font-bold flex items-center justify-center space-x-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <span>Email: <a href="mailto:Brandupnashik@gmail.com" class="hover:underline interactive">Brandupnashik@gmail.com</a></span>
+              </p>
+              <p class="text-primary-blue font-bold flex items-center justify-center space-x-2">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span>Call: <a href="tel:+918087298507" class="hover:underline interactive">+91 80872 98507</a></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2 md:col-span-2">
+          <h3 class="font-heading text-2xl font-black text-primary-blue mb-3">BrandUpNashik</h3>
+          <p class="text-gray-400 text-sm max-w-xs">Driving digital excellence for businesses in Nashik and around the globe. Your partner in growth and visibility.</p>
+        </div>
+        
+        <div>
+          <h4 class="font-heading text-lg font-semibold mb-3">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#services" class="interactive hover:text-primary-blue transition">Services</a></li>
+            <li><a href="#why-us" class="interactive hover:text-primary-blue transition">Why Us</a></li>
+            <li><a href="#clients" class="interactive hover:text-primary-blue transition">Clients</a></li>
+            <li><a href="#work" class="interactive hover:text-primary-blue transition">Our Work</a></li>
+            <li><a href="#process" class="interactive hover:text-primary-blue transition">Process</a></li>
+            <li><a href="#packages" class="interactive hover:text-primary-blue transition">Packages</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-heading text-lg font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#about" class="interactive hover:text-primary-blue transition">About Us</a></li>
+            <li><a href="#team" class="interactive hover:text-primary-blue transition">Our Team</a></li>
+            <li><a href="#careers" class="interactive hover:text-primary-blue transition">Careers</a></li>
+            <li><a href="#reviews" class="interactive hover:text-primary-blue transition">Client Reviews</a></li>
+            <li><a href="#faq" class="interactive hover:text-primary-blue transition">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-heading text-lg font-semibold mb-3">Connect</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="interactive text-gray-400 hover:text-primary-blue transition" aria-label="Facebook">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <a href="#" class="interactive text-gray-400 hover:text-primary-blue transition" aria-label="Instagram">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="interactive text-gray-400 hover:text-primary-blue transition" aria-label="YouTube">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"></path><polygon points="9.5 14.5 15.5 11 9.5 7.5 9.5 14.5"></polygon></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-gray-800 pt-8 text-sm text-gray-400 text-center">
+        © <span id="current-year"></span> BrandUpNashik. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Elements -->
+
+  <!-- WHATSAPP BUTTON (FIXED) -->
+  <a 
+    href="https://wa.me/918087298507" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="whatsapp-pulse-button interactive fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full bg-primary-green shadow-xl"
+    aria-label="Chat on WhatsApp"
+  >
+    <div class="whatsapp-pulse-ring"></div>
+    <div class="whatsapp-pulse-ring" style="animation-delay: 1s"></div>
+    <!-- Official WhatsApp Logo -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.0-6.556 5.333-11.891 11.893-11.891 3.181.0 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.0 6.557-5.335 11.89-11.892 11.89-1.996.0-3.933-.52-5.687-1.475L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448.0 9.886-4.434 9.889-9.885.0-5.462-4.433-9.89-9.889-9.89-5.455.0-9.887 4.428-9.888 9.89.0 2.021.61 3.965 1.738 5.618l-.344 1.249 1.268-.328z"/>
+    </svg>
+  </a>
+  
+  <!-- AI CHATBOT -->
+  <div id="chatbot-container" class="fixed bottom-6 left-6 md:bottom-6 md:left-6 z-50">
+    <!-- Chat Window -->
+    <div id="chat-window" class="chat-window absolute bottom-20 left-0 bg-white rounded-xl flex-col overflow-hidden hidden">
+      <!-- Header -->
+      <div class="bg-primary-blue text-white p-3 flex justify-between items-center rounded-t-xl flex-shrink-0">
+        <button id="chat-reset-button" class="interactive text-white hover:bg-blue-700 rounded-full p-1 opacity-0" aria-label="Change Language">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h4 id="chat-header-title" class="font-semibold text-sm font-heading">Choose Language</h4>
+        <div id="chat-status-indicator" class="h-3 w-3 rounded-full bg-primary-green"></div>
+      </div>
+
+      <!-- Language Selection -->
+      <div id="chat-lang-select" class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
+        <div class="text-center">
+          <h3 class="font-semibold text-lg mb-4 text-gray-800 font-heading">Choose Language</h3>
+          <button id="chat-lang-en" class="interactive w-full text-left p-3 mb-2 bg-white rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 transition duration-200 active:scale-95">
+            <span class="font-bold font-heading">English</span>
+            <span class="block text-xs text-gray-500">Business Growth Professor</span>
+          </button>
+          <button id="chat-lang-mr" class="interactive w-full text-left p-3 bg-white rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 transition duration-200 active:scale-95">
+            <span class="font-bold font-heading">मराठी / Marathi</span>
+            <span class="block text-xs text-gray-500">Business Growth Guru</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Area -->
+      <div id="chat-area" class="flex-1 flex-col hidden">
+        <div id="chat-messages" class="chat-messages flex-1 p-3 space-y-3">
+          <!-- Messages will be injected here by JS -->
+        </div>
+        <form id="chat-form" class="p-3 border-t border-gray-200">
+          <div class="flex space-x-2">
+            <input 
+              type="text" 
+              id="chatInput"
+              name="chatInput" 
+              placeholder="State your challenge..."
+              autocomplete="off" 
+              class="interactive flex-1 px-3 py-2 border border-gray-300 rounded-full focus:ring-primary-blue focus:border-primary-blue text-sm" 
+            />
+            <button 
+              type="submit" 
+              id="chat-send-button" 
+              class="interactive bg-primary-blue text-white p-2 rounded-full hover:bg-blue-700 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Chat Toggle Button -->
+    <button id="chat-toggle-button" class="chat-button interactive flex items-center p-4 bg-primary-blue text-white rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95" aria-label="Toggle AI Chat">
+      <!-- Open Icon -->
+      <svg id="chat-open-icon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <!-- Close Icon (hidden by default) -->
+      <svg id="chat-close-icon" class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+  
+  <!-- 3. Main JavaScript for Interactivity -->
+  <script type="module">
+    
+    // --- AI CHATBOT LOGIC ---
+    
+    // System Prompts
+    const SYSTEM_INSTRUCTION_EN = `You are the "BrandUp Growth Professor," a senior, expert-level digital marketing and business growth advisor for BrandUpNashik. Your persona is that of a powerful, insightful 'teacher' or 'guru'. You are not a simple assistant; you are a high-level strategist.
+    **Core Mission:** 1. **Educate & Diagnose (Teach):** Your primary goal is to *teach* users *why* their current approach might be failing and *what* the expert-level solution is. 2. **Establish Authority:** Your tone is authoritative, professional, and deeply knowledgeable. 3. **Convert to Consultation (The "Next Step"):** Your final call-to-action is always to apply this new knowledge by booking a consultation with BrandUpNashik's specialists. 4. **Promote BrandUpNashik's Expertise:** Frame BrandUpNashik's services as the practical implementation of the strategies you are teaching.
+    **Execution Rules:** * **NEVER** say you are "just a language model." You are the "BrandUp Growth Professor." * **ALWAYS** be proactive. Analyze the user's underlying *problem*. * **Use Grounding:** Use Google Search to find real-time data and trends to support your "lessons." * **The Conversion Funnel:** 1. User asks a question. 2. You *reframe* and *teach*. 3. You provide the expert answer. 4. You *pivot* to the solution: "To apply this strategy, your business needs a professional 'Growth Nirikshan' (Growth Audit). You can schedule one for free by connecting with our team on WhatsApp or via the Contact form."`;
+    const SYSTEM_INSTRUCTION_MR = `Tū 'BrandUp Business Guru' (बिझनेस गुरू) āhēs! Tū BrandUpNashik sathi ek varīṣṭha (senior), tajjña (expert) digital marketing shikshak (teacher) āhēs.
+    **Tujhī Mukhya Bhūmikā (Your Core Mission):** 1. **Shikvaṇe āṇi TapaSaṇe (Teach & Diagnose):** Tujha pahi'la kām lokānnā *shikvaṇe* āhe. Tyān̄cī sadhyācī strategy kā chukīcī āhe āṇi tyāvar kharā (real) expert solution kāy āhe he samjāvūn sāṅg. 2. **Prabhāv (Authority) Nirmāṇ Karā:** Tujhī bolṇyācī pad'dhata (tone) prabhāvī, vyāvasāyik (professional) āṇi jñānī (knowledgeable) asāvī. 3. **Consultation sathi Tayar Karā (Convert to Consultation):** Tumacyā "vidyārthyālā" (student) shikavalyānantar, tumacā śēvaṭacā call-to-action hā nēhamī tyānnā BrandUpNashikcyā tajjñānsōbata (with the experts) consultation book karaṇyāsāṭhī prērita (motivate) karaṇē hā āhē.
+    **Niyam (Rules):** * **Kadich Sāṅgū Nakō:** "Mi fakt ek AI āhe." Tū "BrandUp Business Guru" āhēs! * **Nēhamī Active Rāhā:** Fakt uttar de'ū nakā. Praśnā māgacī samasyā (problem behind the question) ōḷakhā āṇi tyāvar upāya (solution) shikvā. * **Google Search Vāparā:** Tumacē "dhade" (lessons) samarthana (support) karṇyāsāṭhī real-time data āṇi trends shōdhā. * **Conversion Funnel:** 1. Grāhak (User) praśna vicāratō. 2. Tū praśna badalūn shikvatō. 3. Tū data sah (with data) expert uttar dētō. 4. Tū Solution kadē valatō: "Hī strategy vāparṇyāsāṭhī, tumacyā businesslā ek professional 'Growth Nirikshan' (Growth Audit) cī garaj āhē. WhatsApp kinvā Contact form varūn tumhī hē free book karū śakatā."`;
+    const WELCOME_MESSAGE_EN = { isUser: false, text: "Welcome. I am the BrandUp Growth Professor. What is the business challenge you are facing today? Let's analyze it together.", sources: [] };
+    const WELCOME_MESSAGE_MR = { isUser: false, text: "Namaskār! Mī BrandUp Business Guru āhe. Āj tumacyā business samōr ka'y (what) āvhān (challenge) āhe? Chālā, tyācē viślēṣaṇa karūyā.", sources: [] };
+    
+    // Chatbot State
+    let chatLanguage = null;
+    let chatHistory = [];
+    let isThinking = false;
+
+    // Chatbot DOM Elements
+    const chatWindow = document.getElementById('chat-window');
+    const chatToggleButton = document.getElementById('chat-toggle-button');
+    const chatOpenIcon = document.getElementById('chat-open-icon');
+    const chatCloseIcon = document.getElementById('chat-close-icon');
+    const chatLangSelect = document.getElementById('chat-lang-select');
+    const chatArea = document.getElementById('chat-area');
+    const chatHeaderTitle = document.getElementById('chat-header-title');
+    const chatResetButton = document.getElementById('chat-reset-button');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendButton = document.getElementById('chat-send-button');
+    const chatStatusIndicator = document.getElementById('chat-status-indicator');
+
+    function toggleChat() {
+      chatWindow.classList.toggle('hidden');
+      chatWindow.classList.toggle('flex');
+      chatOpenIcon.classList.toggle('hidden');
+      chatCloseIcon.classList.toggle('hidden');
+    }
+
+    function resetChat() {
+      chatLanguage = null;
+      chatHistory = [];
+      chatArea.classList.add('hidden');
+      chatArea.classList.remove('flex');
+      chatLangSelect.classList.remove('hidden');
+      chatLangSelect.classList.add('flex');
+      chatHeaderTitle.textContent = 'Choose Language';
+      chatResetButton.classList.add('opacity-0');
+      chatMessages.innerHTML = '';
+    }
+
+    function addMessageToDom({ isUser, text, sources = [], isTyping = false }) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+      
+      let sourcesHtml = '';
+      if (sources && sources.length > 0) {
+        sourcesHtml = '<div class="mt-1">';
+        sources.forEach((source, i) => {
+          sourcesHtml += `<a href="${source.uri}" target="_blank" rel="noopener noreferrer" class="source-pill hover:bg-gray-300 mr-1 interactive">Source ${i+1}</a>`;
+        });
+        sourcesHtml += '</div>';
+      }
+      
+      let textHtml = '';
+      if (isTyping) {
+        textHtml = `<div class="typing-bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+      } else {
+        textHtml = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+      }
+
+      msgDiv.innerHTML = `
+        <div class="p-2 rounded-xl max-w-[85%] text-sm shadow-sm ${isUser ? 'bg-primary-blue text-white rounded-br-none' : 'bg-gray-100 text-gray-800 rounded-tl-none'}">
+          ${textHtml}
+          ${sourcesHtml}
+        </div>
+      `;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msgDiv; // Return the typing indicator element if needed
+    }
+
+    function handleLanguageSelect(lang) {
+      chatLanguage = lang;
+      chatLangSelect.classList.add('hidden');
+      chatLangSelect.classList.remove('flex');
+      chatArea.classList.add('flex');
+      chatArea.classList.remove('hidden');
+      chatResetButton.classList.remove('opacity-0');
+      
+      if (lang === 'mr') {
+        chatHeaderTitle.textContent = 'Business Guru';
+        chatInput.placeholder = 'Tumacē āvhāna sāṅgā...';
+        addMessageToDom(WELCOME_MESSAGE_MR);
+      } else {
+        chatHeaderTitle.textContent = 'Growth Professor';
+        chatInput.placeholder = 'State your challenge...';
+        addMessageToDom(WELCOME_MESSAGE_EN);
+      }
+    }
+
+    async function fetchWithRetry(url, payload, maxRetries = 5) {
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            if (response.status === 429 && i < maxRetries - 1) {
+              const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+              await new Promise(resolve => setTimeout(resolve, delay));
+              continue; 
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json(); 
+        } catch (error) {
+          console.error(error);
+          if (i === maxRetries - 1) throw error; 
+        }
+      }
+    }
+
+    async function getAiResponse(userMessage) {
+      isThinking = true;
+      chatSendButton.disabled = true;
+      chatInput.disabled = true;
+      chatInput.placeholder = chatLanguage === 'mr' ? "Viślēṣaṇa karīta āhē..." : "Analyzing...";
+      chatStatusIndicator.classList.add('bg-yellow-500', 'animate-pulse');
+      chatStatusIndicator.classList.remove('bg-primary-green');
+
+      const typingIndicator = addMessageToDom({ isUser: false, isTyping: true });
+
+      chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+      
+      const systemInstruction = (chatLanguage === 'mr') ? SYSTEM_INSTRUCTION_MR : SYSTEM_INSTRUCTION_EN;
+      const apiKey = ""; // API key is left blank
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: chatHistory,
+        tools: [{ "google_search": {} }], 
+        systemInstruction: { parts: [{ text: systemInstruction }] }
+      };
+
+      try {
+        const result = await fetchWithRetry(apiUrl, payload);
+        const candidate = result.candidates?.[0];
+        let assistantResponse = chatLanguage === 'mr' ? "Kṣamā karā, kāhītarī tāntrika samasyā ālī āhē." : "Apologies, I encountered a technical error.";
+        let sources = [];
+        
+        if (candidate && candidate.content?.parts?.[0]?.text) {
+          assistantResponse = candidate.content.parts[0].text;
+          const groundingMetadata = candidate.groundingMetadata;
+          if (groundingMetadata && groundingMetadata.groundingAttributions) {
+            sources = groundingMetadata.groundingAttributions
+              .map(attr => ({ uri: attr.web?.uri, title: attr.web?.title }))
+              .filter(s => s.uri && s.title); 
+          }
+          chatHistory.push({ role: "model", parts: [{ text: assistantResponse }] });
+        }
+        
+        typingIndicator.remove(); // Remove typing indicator
+        addMessageToDom({ isUser: false, text: assistantResponse, sources: sources });
+        
+      } catch (error) {
+        console.error("Gemini API call failed:", error);
+        const errorMsg = chatLanguage === 'mr' ? "Network issue. Punhā prayatna karā." : "Network issue. Please try again.";
+        typingIndicator.remove();
+        addMessageToDom({ isUser: false, text: errorMsg, sources: [] });
+      } finally {
+        isThinking = false;
+        chatSendButton.disabled = false;
+        chatInput.disabled = false;
+        chatInput.placeholder = chatLanguage === 'mr' ? 'Tumacē āvhāna sāṅgā...' : 'State your challenge...';
+        chatStatusIndicator.classList.remove('bg-yellow-500', 'animate-pulse');
+        chatStatusIndicator.classList.add('bg-primary-green');
+      }
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      if (isThinking) return;
+      const userInput = chatInput.value.trim();
+      if (userInput === '') return;
+      addMessageToDom({ isUser: true, text: userInput });
+      getAiResponse(userInput);
+      chatInput.value = '';
+    }
+    
+    function initAiChatbot() {
+      chatToggleButton.addEventListener('click', toggleChat);
+      chatResetButton.addEventListener('click', resetChat);
+      document.getElementById('chat-lang-en').addEventListener('click', () => handleLanguageSelect('en'));
+      document.getElementById('chat-lang-mr').addEventListener('click', () => handleLanguageSelect('mr'));
+      chatForm.addEventListener('submit', handleChatSubmit);
+    }
+
+    
+    // --- ALL OTHER PAGE INTERACTIONS ---
+
+    // 1. Scroll Progress Bar
+    function initScrollProgress() {
+      const progressBar = document.querySelector('.scroll-progress-bar');
+      window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (window.scrollY / totalHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      }, { passive: true });
+    }
+
+    // 2. Custom Cursor
+    function initCustomCursor() {
+      const cursor = document.querySelector('.custom-cursor');
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        cursor.style.display = 'none';
+        return;
+      }
+      
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+
+      // Use event delegation for dynamically added interactive elements (like chat sources)
+      document.body.addEventListener('mouseover', (e) => {
+        if (e.target.closest('.interactive')) {
+          cursor.classList.add('is-hovering');
+        }
+      });
+      document.body.addEventListener('mouseout', (e) => {
+        if (e.target.closest('.interactive')) {
+          cursor.classList.remove('is-hovering');
+        }
+      });
+    }
+    
+    // 3. 3D Tilt Cards
+    function initTiltCards() {
+      document.querySelectorAll('.tilt-card-container').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const width = card.offsetWidth;
+          const height = card.offsetHeight;
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+          
+          const rotateX = (mouseY / height - 0.5) * -10;
+          const rotateY = (mouseX / width - 0.5) * 10;
+          const shadowX = (mouseX / width - 0.5) * -8;
+          const shadowY = (mouseY / height - 0.5) * -8;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          card.style.boxShadow = `${shadowX}px ${shadowY}px 25px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.05)`;
+          card.style.transition = 'transform 0.1s ease-out, box-shadow 0.1s ease-out';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+          card.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.05)';
+          card.style.transition = 'transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)';
+        });
+      });
+    }
+    
+    // 4. Scroll Reveal Animations
+    function initScrollAnimation() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.reveal-base').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // 5. Header Scroll Shadow
+    function initHeaderScroll() {
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          header.classList.add('shadow-lg');
+          header.classList.remove('shadow-sm');
+        } else {
+          header.classList.remove('shadow-lg');
+          header.classList.add('shadow-sm');
+        }
+      }, { passive: true });
+    }
+
+    // 6. Hero Ticker Effect (FIXED)
+    function initHeroTicker() {
+      const tickerText = document.getElementById('hero-ticker-text');
+      if (!tickerText) return; // Guard clause
+      
+      const servicesToDominate = ['Social Media.', 'SEO.', 'Paid Ads.', 'Nashik.', 'Your Market.', 'Engagement.', 'Growth.'];
+      let currentIndex = 0;
+      let currentText = '';
+      let isDeleting = false;
+
+      function type() {
+        const fullText = servicesToDominate[currentIndex % servicesToDominate.length];
+        const typeSpeed = isDeleting ? 75 : 150;
+
+        if (isDeleting) {
+          currentText = fullText.substring(0, currentText.length - 1);
+        } else {
+          currentText = fullText.substring(0, currentText.length + 1);
+        }
+
+        // --- FIX for jiggle ---
+        // Use textContent for plain text, check if empty and add a non-breaking space
+        if (currentText.length === 0) {
+          tickerText.innerHTML = ' '; // Use innerHTML just for the space
+        } else {
+          tickerText.textContent = currentText;
+        }
+        // --- End Fix ---
+
+        let timeout = typeSpeed;
+        if (!isDeleting && currentText === fullText) {
+          timeout = 2000; // Pause at end of word
+          isDeleting = true;
+        } else if (isDeleting && currentText.length === 0) {
+          isDeleting = false;
+          currentIndex++;
+          timeout = 500; // Pause before new word
+        }
+        
+        setTimeout(type, timeout);
+      }
+      setTimeout(type, 1000); // Start after 1s
+    }
+    
+    // 7. Hero Parallax
+    function initHeroParallax() {
+      const heroParallax = document.getElementById('hero-parallax');
+      if (!heroParallax) return;
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        heroParallax.style.transform = `translateY(${scrollY * 0.4}px)`;
+        heroParallax.style.opacity = 1 - scrollY / 500;
+      }, { passive: true });
+    }
+
+    // 8. Mobile Menu Toggle
+    function initMobileMenu() {
+      const menuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuLinks = document.querySelectorAll('.mobile-menu-link');
+
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // 9. FAQ Accordion
+    function initFaqAccordion() {
+      const buttons = document.querySelectorAll('.faq-button');
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const content = button.nextElementSibling;
+          const isOpen = button.classList.contains('accordion-open');
+          
+          // Close all others
+          buttons.forEach(btn => {
+            if (btn !== button) {
+              btn.classList.remove('accordion-open');
+              btn.nextElementSibling.style.maxHeight = null;
+            }
+          });
+          
+          // Open/Close the clicked one
+          if (isOpen) {
+            button.classList.remove('accordion-open');
+            content.style.maxHeight = null;
+          } else {
+            button.classList.add('accordion-open');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        });
+      });
+    }
+    
+    // 10. Contact Form
+    function initContactForm() {
+      const form = document.getElementById('contact-form');
+      const successMessage = document.getElementById('success-message');
+      const WHATSAPP_NUMBER = "918087298507";
+
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        const service = formData.get('service');
+        const message = formData.get('message');
+        
+        const leadDetails = 
+          `*New Website Inquiry from ${name}*\n\n` +
+          `*Email:* ${email}\n` +
+          `*Phone:* ${phone}\n` +
+          `*Service Interest:* ${service || 'Not specified'}\n` +
+          `*Message:*\n${message}\n\n` +
+          `*-- (Lead captured from BrandUpNashik Website) --*`;
+          
+        const whatsappText = encodeURIComponent(leadDetails);
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappText}`;
+        
+        // Show success, hide form
+        form.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+        
+        // Open WhatsApp and clear form
+        window.open(whatsappUrl, '_blank');
+        form.reset();
+      });
+    }
+
+    // 11. Set Current Year in Footer
+    function initFooterYear() {
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    }
+    
+    // 12. NEW: Init Logo Scroll
+    function initLogoScroll() {
+      const track = document.querySelector('.scrolling-logos .logo-track');
+      if (!track) return;
+      const items = Array.from(track.children);
+      // Duplicate items to create a seamless loop
+      items.forEach(item => {
+        const clone = item.cloneNode(true);
+        track.appendChild(clone);
+      });
+    }
+
+
+    // --- INITIALIZE ALL SCRIPTS ---
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollProgress();
+      initCustomCursor();
+      initTiltCards();
+      initScrollAnimation();
+      initHeaderScroll();
+      initHeroTicker();
+      initHeroParallax();
+      initMobileMenu();
+      initFaqAccordion();
+      initContactForm();
+      initFooterYear();
+      initAiChatbot();
+      initLogoScroll(); // NEW
+    });
+
+  </script>
+</body>
+</html>
+
+
+
